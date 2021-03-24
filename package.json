@@ -1,0 +1,22 @@
+{
+  "name": "ninjatube",
+  "version": "1.0.0",
+  "description": "ninja's secret tube.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legoboy123/ninjaTube.git"
+  },
+  "author": "han jisoo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/legoboy123/ninjaTube/issues"
+  },
+  "homepage": "https://github.com/legoboy123/ninjaTube#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
