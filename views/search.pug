@@ -5,9 +5,12 @@ block content
     .search__header 
         h3 "#{searchingBy}"에 대한 은밀한 정보다...
     .search__videos 
+        if videos.length === 0
+            h5 존재하지 없는 정보이다...
         each item in videos 
             +videoBlock({
                 title:item.title,
                 views:item.views,
-                videoFile:item.videoFile
+                videoFile:item.fileUrl,
+                id:item.id
             })
