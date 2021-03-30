@@ -4,7 +4,9 @@
   "description": "ninja's secret tube.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node init.js --delay 2"
+    "dev:server": "nodemon --exec babel-node init.js --delay 2",
+    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
+    "build:assets": "cross-env WEBPACK_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -19,24 +21,37 @@
   "dependencies": {
     "@babel/core": "^7.13.10",
     "@babel/node": "^7.13.12",
+    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.13.12",
+    "autoprefixer": "^9.3.1",
+    "babel-loader": "^8.2.2",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "css-loader": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "helmet": "^4.4.1",
     "mongoose": "^5.12.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "pug": "^3.0.2"
+    "node-sass": "^4.14.1",
+    "postcss-loader": "^3.0.0",
+    "pug": "^3.0.2",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.1.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^7.23.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
+    "mini-css-extract-plugin": "^1.4.0",
     "nodemon": "^2.0.7",
+    "postcss": "^8.2.8",
     "prettier": "^2.2.1"
   }
 }
