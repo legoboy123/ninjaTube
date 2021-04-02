@@ -5,6 +5,7 @@ const OUTPUT_DIR = path.join(__dirname, "static");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require("autoprefixer");
 const loader = require("sass-loader");
+
 const config = {
   entry: ENTRY_FILE,
   mode: MODE,
