@@ -10,6 +10,16 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     .header__column {
+      a {
+        display: flex;
+        align-items: center;
+        h4 {
+          color: white;
+          margin-left: 5px;
+          font-weight: 600;
+          font-size: large;
+        }
+      }
       i {
         color: white;
         font-size: 30px;
@@ -27,6 +37,7 @@
         color: white;
         font-weight: 600;
         text-transform: uppercase;
+        align-items: center;
         li {
           a {
             color: white;
@@ -35,6 +46,11 @@
         li:not(:last-child) {
           margin-right: 15px;
         }
+      }
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
       }
       form {
         width: 100%;
