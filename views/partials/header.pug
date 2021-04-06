@@ -21,4 +21,7 @@ header.header
                             a(href=routes.logout) Log Out
                         li
                             a(href=routes.me)
-                                img(src=loggedUser.avatarUrl)
+                                if loggedUser.githubId
+                                    img(src=`${loggedUser.avatarUrl}`)
+                                else 
+                                    img(src=`/${loggedUser.avatarUrl}`)

@@ -45,14 +45,6 @@ app.use(cookieParser());
 
 app.use(localsMiddleware);
 
-app.use(function (req, res, next) {
-  res.setHeader(
-    "Content-Security-Policy",
-    "script-src 'self' https://archive.org"
-  );
-  return next();
-});
-
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);

@@ -8,6 +8,7 @@ const loader = require("sass-loader");
 
 const config = {
   entry: ENTRY_FILE,
+  devtool: "source-map",
   mode: MODE,
   module: {
     rules: [
