@@ -27,17 +27,18 @@
       align-items: center;
       #jsVolumeBtn {
         margin-right: 10px;
+        z-index: 11;
       }
     }
     .videoPlayer__volume {
       position: absolute;
       padding: 0;
       opacity: 1;
-      top: -60px;
-      left: -25px;
-      transform: rotate(-90deg);
+      transform: rotate(-45deg);
+      top: -100px;
+      left: -30px;
       z-index: 10;
-      width: 80px;
+      width: 8000px;
 
       input {
         background-color: rgba(0, 0, 0, 0.7);

@@ -369,16 +369,17 @@ input[type="submit"] {
       display: flex;
       align-items: center; }
       .videoPlayer .videoPlayer__controls .videoPlayer__column:first-child #jsVolumeBtn {
-        margin-right: 10px; }
+        margin-right: 10px;
+        z-index: 11; }
     .videoPlayer .videoPlayer__controls .videoPlayer__volume {
       position: absolute;
       padding: 0;
       opacity: 1;
-      top: -60px;
-      left: -25px;
-      transform: rotate(-90deg);
+      transform: rotate(-45deg);
+      top: -100px;
+      left: -30px;
       z-index: 10;
-      width: 80px; }
+      width: 8000px; }
       .videoPlayer .videoPlayer__controls .videoPlayer__volume input {
         background-color: rgba(0, 0, 0, 0.7); }
         .videoPlayer .videoPlayer__controls .videoPlayer__volume input::-webkit-slider-runnable-track {
