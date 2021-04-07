@@ -1,24 +1,5 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
-
-/***/ "./assets/js/main.js":
-/*!***************************!*\
-  !*** ./assets/js/main.js ***!
-  \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./assets/scss/styles.scss\");\n/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./videoPlayer */ \"./assets/js/videoPlayer.js\");\n/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_videoPlayer__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\n\n\n//# sourceURL=webpack://ninjatube/./assets/js/main.js?");
-
-/***/ }),
 
 /***/ "./assets/js/videoPlayer.js":
 /*!**********************************!*\
@@ -26,7 +7,196 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scs
   \**********************************/
 /***/ (() => {
 
-eval("const videoContainer = document.getElementById(\"jsVideoPlayer\");\r\nconst videoPlayer = document.querySelector(\"#jsVideoPlayer video\");\r\nconst playBtn = document.getElementById(\"jsPlayButton\");\r\nconst volumeBtn = document.getElementById(\"jsVolumeBtn\");\r\nconst fullScrnBtn = document.getElementById(\"jsFullScreen\");\r\nconst currentTime = document.getElementById(\"currentTime\");\r\nconst totalTime = document.getElementById(\"totalTime\");\r\nconst volumeRange = document.getElementById(\"jsVolume\");\r\n\r\nfunction handlePlayClick() {\r\n  if (videoPlayer.paused) {\r\n    videoPlayer.play();\r\n    playBtn.innerHTML = '<i class=\"fas fa-pause\"></i>';\r\n  } else {\r\n    videoPlayer.pause();\r\n    playBtn.innerHTML = '<i class=\"fas fa-play\"></i>';\r\n  }\r\n}\r\n\r\nfunction handleVolumeClick() {\r\n  if (videoPlayer.muted) {\r\n    videoPlayer.muted = false;\r\n    volumeBtn.innerHTML = '<i class=\"fas fa-volume-up\"></i>';\r\n    volumeRange.value = videoPlayer.volume;\r\n  } else {\r\n    volumeRange.value = 0;\r\n    videoPlayer.muted = true;\r\n    volumeBtn.innerHTML = '<i class=\"fas fa-volume-mute\"></i>';\r\n  }\r\n}\r\n\r\nfunction exitFullScreen() {\r\n  fullScrnBtn.innerHTML = '<i class=\"fas fa-expand\"></i>';\r\n  fullScrnBtn.addEventListener(\"click\", goFullScreen);\r\n  if (document.exitFullscreen) {\r\n    document.exitFullscreen();\r\n  } else if (document.mozCancelFullScreen) {\r\n    document.mozCancelFullScreen();\r\n  } else if (document.webkitExitFullscreen) {\r\n    document.webkitExitFullscreen();\r\n  } else if (document.msExitFullscreen) {\r\n    document.msExitFullscreen();\r\n  }\r\n}\r\n\r\nfunction goFullScreen() {\r\n  if (videoContainer.requestFullscreen) {\r\n    videoContainer.requestFullscreen();\r\n  } else if (videoContainer.mozRequestFullScreen) {\r\n    videoContainer.mozRequestFullScreen();\r\n  } else if (videoContainer.webkitRequestFullscreen) {\r\n    videoContainer.webkitRequestFullscreen();\r\n  } else if (videoContainer.msRequestFullscreen) {\r\n    videoContainer.msRequestFullscreen();\r\n  }\r\n  fullScrnBtn.innerHTML = '<i class=\"fas fa-compress\"></i>';\r\n  fullScrnBtn.removeEventListener(\"click\", goFullScreen);\r\n  fullScrnBtn.addEventListener(\"click\", exitFullScreen);\r\n}\r\n\r\nconst formatDate = (seconds) => {\r\n  const secondsNumber = parseInt(seconds, 10);\r\n  let hours = Math.floor(secondsNumber / 3600);\r\n  let minutes = Math.floor((secondsNumber - hours * 3600) / 60);\r\n  let totalSeconds = secondsNumber - hours * 3600 - minutes * 60;\r\n\r\n  if (hours < 10) {\r\n    hours = `0${hours}`;\r\n  }\r\n  if (minutes < 10) {\r\n    minutes = `0${minutes}`;\r\n  }\r\n  if (totalSeconds < 10) {\r\n    totalSeconds = `0${totalSeconds}`;\r\n  }\r\n  return `${hours}:${minutes}:${totalSeconds}`;\r\n};\r\n\r\nfunction getCurrentTime() {\r\n  currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));\r\n}\r\n\r\nfunction setTotalTime() {\r\n  const totalTimeString = formatDate(videoPlayer.duration);\r\n  totalTime.innerHTML = totalTimeString;\r\n  setInterval(getCurrentTime, 1000);\r\n}\r\n\r\nfunction handleEnded() {\r\n  videoPlayer.currentTime = 0;\r\n  playBtn.innerHTML = '<i class=\"fas fa-play\"></i>';\r\n}\r\n\r\nfunction handleDrag(event) {\r\n  const {\r\n    target: { value },\r\n  } = event;\r\n  videoPlayer.volume = value;\r\n  if (value >= 0.6) {\r\n    volumeBtn.innerHTML = '<i class=\"fas fa-volume-up\"></i>';\r\n  } else if (value >= 0.2) {\r\n    volumeBtn.innerHTML = '<i class=\"fas fa-volume-down\"></i>';\r\n  } else {\r\n    volumeBtn.innerHTML = '<i class=\"fas fa-volume-off\"></i>';\r\n  }\r\n}\r\n\r\n//--------------------------------------------------------------------------------------------\r\n\r\nfunction init() {\r\n  videoPlayer.volume = 0.5;\r\n  playBtn.addEventListener(\"click\", handlePlayClick);\r\n  volumeBtn.addEventListener(\"click\", handleVolumeClick);\r\n  fullScrnBtn.addEventListener(\"click\", goFullScreen);\r\n  videoPlayer.addEventListener(\"timeupdate\", setTotalTime);\r\n  videoPlayer.addEventListener(\"ended\", handleEnded);\r\n  volumeRange.addEventListener(\"input\", handleDrag);\r\n  videoPlayer.addEventListener(\"click\", handlePlayClick);\r\n}\r\n\r\nif (videoContainer) {\r\n  init();\r\n}\r\n\n\n//# sourceURL=webpack://ninjatube/./assets/js/videoPlayer.js?");
+const videoContainer = document.getElementById("jsVideoPlayer");
+const videoPlayer = document.querySelector("#jsVideoPlayer video");
+const playBtn = document.getElementById("jsPlayButton");
+const volumeBtn = document.getElementById("jsVolumeBtn");
+const fullScrnBtn = document.getElementById("jsFullScreen");
+const currentTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
+const volumeRange = document.getElementById("jsVolume");
+
+function handlePlayClick() {
+  if (videoPlayer.paused) {
+    videoPlayer.play();
+    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  } else {
+    videoPlayer.pause();
+    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
+}
+
+function handleVolumeClick() {
+  if (videoPlayer.muted) {
+    videoPlayer.muted = false;
+    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    volumeRange.value = videoPlayer.volume;
+  } else {
+    volumeRange.value = 0;
+    videoPlayer.muted = true;
+    volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+  }
+}
+
+function exitFullScreen() {
+  fullScrnBtn.innerHTML = '<i class="fas fa-expand"></i>';
+  fullScrnBtn.addEventListener("click", goFullScreen);
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+}
+
+function goFullScreen() {
+  if (videoContainer.requestFullscreen) {
+    videoContainer.requestFullscreen();
+  } else if (videoContainer.mozRequestFullScreen) {
+    videoContainer.mozRequestFullScreen();
+  } else if (videoContainer.webkitRequestFullscreen) {
+    videoContainer.webkitRequestFullscreen();
+  } else if (videoContainer.msRequestFullscreen) {
+    videoContainer.msRequestFullscreen();
+  }
+  fullScrnBtn.innerHTML = '<i class="fas fa-compress"></i>';
+  fullScrnBtn.removeEventListener("click", goFullScreen);
+  fullScrnBtn.addEventListener("click", exitFullScreen);
+}
+
+const formatDate = (seconds) => {
+  const secondsNumber = parseInt(seconds, 10);
+  let hours = Math.floor(secondsNumber / 3600);
+  let minutes = Math.floor((secondsNumber - hours * 3600) / 60);
+  let totalSeconds = secondsNumber - hours * 3600 - minutes * 60;
+
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (totalSeconds < 10) {
+    totalSeconds = `0${totalSeconds}`;
+  }
+  return `${hours}:${minutes}:${totalSeconds}`;
+};
+
+function getCurrentTime() {
+  currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
+}
+
+function setTotalTime() {
+  const totalTimeString = formatDate(videoPlayer.duration);
+  totalTime.innerHTML = totalTimeString;
+  setInterval(getCurrentTime, 1000);
+}
+
+function handleEnded() {
+  videoPlayer.currentTime = 0;
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+
+function handleDrag(event) {
+  const {
+    target: { value },
+  } = event;
+  videoPlayer.volume = value;
+  if (value >= 0.6) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  } else if (value >= 0.2) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+  } else {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
+  }
+}
+
+//--------------------------------------------------------------------------------------------
+
+function init() {
+  videoPlayer.volume = 0.5;
+  playBtn.addEventListener("click", handlePlayClick);
+  volumeBtn.addEventListener("click", handleVolumeClick);
+  fullScrnBtn.addEventListener("click", goFullScreen);
+  videoPlayer.addEventListener("timeupdate", setTotalTime);
+  videoPlayer.addEventListener("ended", handleEnded);
+  volumeRange.addEventListener("input", handleDrag);
+  videoPlayer.addEventListener("click", handlePlayClick);
+}
+
+if (videoContainer) {
+  init();
+}
+
+
+/***/ }),
+
+/***/ "./assets/js/videoRecorder.js":
+/*!************************************!*\
+  !*** ./assets/js/videoRecorder.js ***!
+  \************************************/
+/***/ (() => {
+
+const recorderContainer = document.getElementById("jsRecordContainer");
+const recordBtn = document.getElementById("jsRecordBtn");
+const videoPreview = document.getElementById("jsVideoPreview");
+
+let streamObject;
+let videoRecorder;
+
+const handleVideoData = (event) => {
+  const { data: videoFile } = event;
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(videoFile);
+  link.download = "recorded.webm";
+  document.body.appendChild(link);
+  link.click();
+};
+
+const stopRecording = () => {
+  videoRecorder.stop();
+  recordBtn.removeEventListener("click", stopRecording);
+  recordBtn.addEventListener("click", getVideo);
+  recordBtn.innerHTML = "Start recording";
+};
+
+const startRecording = () => {
+  videoRecorder = new MediaRecorder(streamObject);
+  videoRecorder.start();
+  videoRecorder.addEventListener("dataavailable", handleVideoData);
+  recordBtn.addEventListener("click", stopRecording);
+};
+
+const getVideo = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: { width: 1280, height: 720 },
+    });
+    videoPreview.srcObject = stream;
+    videoPreview.muted = true;
+    videoPreview.play();
+    recordBtn.innerHTML = "Stop recording";
+    streamObject = stream;
+    startRecording();
+  } catch (error) {
+    recordBtn.innerHTML = "웹캠 없잖아 찐따야...";
+  } finally {
+    recordBtn.removeEventListener("click", getVideo);
+  }
+};
+
+function init() {
+  recordBtn.addEventListener("click", getVideo);
+}
+
+if (recorderContainer) {
+  init();
+}
+
 
 /***/ }),
 
@@ -37,7 +207,9 @@ eval("const videoContainer = document.getElementById(\"jsVideoPlayer\");\r\ncons
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://ninjatube/./assets/scss/styles.scss?");
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ })
 
@@ -109,11 +281,25 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./assets/js/main.js");
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!***************************!*\
+  !*** ./assets/js/main.js ***!
+  \***************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ "./assets/scss/styles.scss");
+/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./videoPlayer */ "./assets/js/videoPlayer.js");
+/* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_videoPlayer__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./videoRecorder */ "./assets/js/videoRecorder.js");
+/* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_videoRecorder__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+})();
+
 /******/ })()
 ;
+//# sourceMappingURL=main.js.map
